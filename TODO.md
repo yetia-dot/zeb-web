@@ -1,19 +1,12 @@
-# Vercel Deployment Fix - TypeScript Module Errors
+# Auth Pages Development (Split UI with Crypto Theme)
 
-Status: Approved plan to fix empty page.tsx files causing build failure.
+## Plan Summary
+- Login: Split page, left animated blockchain nodes, right login form.
+- Signup: Two steps - step1 form, step2 Freighter wallet connect.
 
-## TODO Steps
-- [ ] 1. Confirm all blank page.tsx via list_files (done: (auth)/login/,signup/; (dashboard)/profile/,registry/; (market)/page.tsx?, listings?; admin/page.tsx ok)
-- [x] 2. Create TODO.md with steps
-- [x] 3. Fix blank page.tsx: Add minimal React components (Coming Soon skeletons)
-  - app/(auth)/login/page.tsx ✓
-  - app/(auth)/signup/page.tsx ✓ 
-  - app/(dashboard)/profile/page.tsx ✓
-  - app/(dashboard)/registry/page.tsx ✓
-  - app/(market)/listings/page.tsx ✓
-  - app/(market)/page.tsx ✓
-  - app/admin/page.tsx ✓
-- [x] 4. Local test: cd zeb-web && npm run build (TS ✓, all pages static prerendered)
-- [x] 5. Dev server running on http://localhost:3000 ✓
-- [x] 6. Git commit/push new pages
-- [ ] 7. Check Vercel dashboard for successful redeploy (share new log if fails)
+## Steps
+- [x] Create this TODO.md ✅
+- [x
+- [ ] Edit zeb-web/app/(auth)/signup/page.tsx with two-step UI
+- [ ] Test locally (`cd zeb-web && npm run dev`) and verify responsive/step flow
+- [ 

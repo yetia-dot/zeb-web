@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Wallet } from 'lucide-react';
 
 export default function Navbar() {
@@ -18,10 +19,10 @@ export default function Navbar() {
             <a href="#marketplace" className="hover:text-primary transition-colors">Marketplace</a>
           </div>
           
-          <button className="flex items-center gap-2 bg-surface/80 border border-primary text-primary px-5 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(51,255,235,0.4)] hover:shadow-[0_0_25px_rgba(51,255,235,0.8)] transition-all duration-300">
+          <Link href="/signup" className="flex items-center gap-2 bg-surface/80 border border-primary text-primary px-5 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(51,255,235,0.4)] hover:shadow-[0_0_25px_rgba(51,255,235,0.8)] transition-all duration-300">
             <Wallet size={18} />
             <span className="hidden sm:inline">Connect Wallet</span>
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, ImagePlus } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -43,17 +44,20 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-primary text-background font-bold rounded-lg shadow-[0_0_20px_rgba(51,255,235,0.4)] hover:shadow-[0_0_30px_rgba(51,255,235,0.7)] transition-all duration-300 transform hover:-translate-y-1">
+            <Link href="/signup" className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-primary text-background font-bold rounded-lg shadow-[0_0_20px_rgba(51,255,235,0.4)] hover:shadow-[0_0_30px_rgba(51,255,235,0.7)] transition-all duration-300 transform hover:-translate-y-1">
               <ImagePlus size={20} />
               Register Artwork
-            </button>
+            </Link>
             <button className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-secondary text-secondary font-bold rounded-lg shadow-[0_0_15px_rgba(218,65,103,0.2)] hover:shadow-[0_0_25px_rgba(218,65,103,0.5)] hover:bg-secondary/10 transition-all duration-300 transform hover:-translate-y-1">
               Explore Marketplace
               <ArrowRight size={20} />
             </button>
           </div>
+
         </motion.div>
+
       </div>
     </section>
   );
 }
+
