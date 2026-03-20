@@ -12,6 +12,7 @@ Status: Approved plan to fix empty page.tsx files causing build failure.
   - app/(dashboard)/registry/page.tsx ✓
   - app/(market)/listings/page.tsx ✓
   - app/(market)/page.tsx ✓
+  - app/admin/page.tsx ✓
 - [ ] 4. Local test: cd zeb-web && npm run build (expect TS pass)
 - [ ] 5. Fix dev server port/lock: kill processes if needed
 - [ ] 6. git add . && git commit -m "Fix blank pages for Vercel build" && git push
