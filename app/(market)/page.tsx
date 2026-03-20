@@ -1,0 +1,7 @@
+export default function MarketPage() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <div className="text-2xl font-bold">Marketplace Home (Coming Soon)</div>
+    </main>
+  );
+}
