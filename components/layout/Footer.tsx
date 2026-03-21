@@ -5,14 +5,7 @@ import { Twitter, Github, DiscIcon as Discord, ShieldCheck } from 'lucide-react'
 export default function Footer() {
   return (
     <>
-      <section className="py-24 relative overflow-hidden">
-        {/* Abstract CTA Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-surface to-background"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[150px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-1/2 h-full bg-secondary/5 blur-[150px] pointer-events-none"></div>
-        
-        
-      </section>
+      
 
       <footer className="bg-surface py-12 border-t border-surface/50">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
