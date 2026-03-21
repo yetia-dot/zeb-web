@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   username: string;
@@ -35,10 +36,12 @@ export default function SignupPage() {
   const handleBack = () => {
     setStep(1);
   };
-
+  
+  const router = useRouter();
   const handleConnect = () => {
-    console.log('Signup data:', formData);
-    alert('Connecting Freighter Wallet...\n\nMock success! User created with wallet connected.\nIntegrate Freighter SDK here.');
+    // e.preventDefault();
+    // Mock login success - redirect to dashboard
+    router.push('/dashboard');
   };
 
   const isStep1 = step === 1;

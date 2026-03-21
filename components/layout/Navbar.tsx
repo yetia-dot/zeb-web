@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Wallet } from 'lucide-react';
+import { Wallet, User } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ dashboardMode = false }: { dashboardMode?: boolean }) {
   return (
     <nav className="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-md border-b border-surface">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -19,10 +19,16 @@ export default function Navbar() {
             <a href="#marketplace" className="hover:text-primary transition-colors">Marketplace</a>
           </div>
           
-          <Link href="/signup" className="flex items-center gap-2 bg-surface/80 border border-primary text-primary px-5 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(51,255,235,0.4)] hover:shadow-[0_0_25px_rgba(51,255,235,0.8)] transition-all duration-300">
-            <Wallet size={18} />
-            <span className="hidden sm:inline">Connect Wallet</span>
-          </Link>
+{dashboardMode ? (
+            <Link href="/dashboard/profile" className="flex items-center gap-2 bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/50 text-primary px-5 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(51,255,235,0.3)] hover:shadow-[0_0_25px_rgba(51,255,235,0.6)] transition-all duration-300">
+              <User size={20} />
+            </Link>
+          ) : (
+            <Link href="/signup" className="flex items-center gap-2 bg-surface/80 border border-primary text-primary px-5 py-2.5 rounded-lg font-medium shadow-[0_0_15px_rgba(51,255,235,0.4)] hover:shadow-[0_0_25px_rgba(51,255,235,0.8)] transition-all duration-300">
+              <Wallet size={18} />
+              <span className="hidden sm:inline">Connect Wallet</span>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

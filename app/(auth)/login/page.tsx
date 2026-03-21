@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -16,10 +17,12 @@ export default function LoginPage() {
     });
   };
 
+  const router = useRouter();
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login attempt:', formData.identifier, formData.password);
-    alert('Login submitted! (Mock - integrate your auth logic here)');
+    // Mock login success - redirect to dashboard
+    router.push('/dashboard');
   };
 
   return (
