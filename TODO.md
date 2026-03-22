@@ -1,13 +1,36 @@
-# Dashboard Update TODO - COMPLETE ✅
+# ZEB Frontend TODO
 
-## Implemented:
-1. ✅ Simplified hero to "Welcome Mr. X" + minimized cards
-2. ✅ Added search/filter bars (Type/Genre) to both tabs
-3. ✅ Added "Upload New" button on My Uploads tab
-4. ✅ Fixed Navbar overlap with `pt-20` on main
-5. ✅ Verified no CTA section needed
+## Current Progress
+- [x] Landing page setup
+- [x] Basic dashboard
+- [x] Admin page
+- [x] Market listings
 
-## Test:
-- `cd zeb-web && npm run dev`
-- Visit http://localhost:3000/dashboard
-- Test search, filters, tab switch, upload button, no overlaps
+## Immediate Tasks (Auth Focus - based on open tabs)
+- [ ] Complete auth flow: implement signup page (/app/(auth)/signup/page.tsx)
+- [ ] Complete login page (/app/(auth)/login/page.tsx - currently visible)
+- [ ] Add auth middleware and protected routes
+- [ ] Integrate authentication provider (e.g., NextAuth.js or Clerk)
+
+## Dashboard Improvements
+- [ ] Enhance profile page (/app/dashboard/profile/page.tsx)
+- [ ] Add artwork registry functionality (/app/dashboard/registry/page.tsx)
+- [ ] Implement TabbedArtworks and DashboardCard components fully
+
+## Market Features
+- [ ] Build full market page (/app/market/page.tsx)
+- [ ] Add listing creation/editing
+- [ ] Search and filter listings
+
+## Components
+- [ ] Complete Navbar and Footer responsiveness
+- [ ] UI components polish (buttons, modals, etc.)
+
+## Deployment & Polish
+- [ ] Environment variables setup
+- [ ] Error handling and loading states
+- [ ] Testing (unit/integration)
+- [ ] Deploy to Vercel/Netlify
+
+## Done
+<!-- Add completed items here -->
