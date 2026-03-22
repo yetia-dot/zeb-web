@@ -97,8 +97,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <label htmlFor="identifier" className="block text-sm font-semibold text-foreground tracking-wide">
-                Username or Email
-              </label>
+                Username              </label>
               <input
                 id="identifier"
                 name="identifier"
@@ -106,7 +105,7 @@ export default function LoginPage() {
                 value={formData.identifier}
                 onChange={handleChange}
                 className="w-full px-5 py-4 bg-surface/60 hover:bg-surface/70 border border-border/40 hover:border-primary/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-foreground placeholder:text-foreground/40 text-lg shadow-sm hover:shadow-md"
-                placeholder="username or email@example.com"
+                placeholder="username"
                 required
               />
             </div>
