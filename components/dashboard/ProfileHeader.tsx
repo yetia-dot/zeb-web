@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { User, Wallet, ShieldCheck, TrendingUp, Gavel, BarChart3 } from 'lucide-react'
+import Link from 'next/link'
+import { User, Wallet, ShieldCheck, TrendingUp, Gavel, BarChart3, Edit } from 'lucide-react'
 
 const mockUser = {
   avatar: '/file.svg',
@@ -32,9 +33,14 @@ export default function ProfileHeader() {
           </div>
         </div>
         <div className="flex-1 text-left md:text-left">
-          <h1 className="text-xl md:text-md font-black bg-gradient-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent ">
-            {mockUser.username}
-          </h1>
+          <div className="flex items-center gap-2 mb-2">
+            <h1 className="text-xl md:text-2xl font-black bg-gradient-to-r from-foreground via-primary to-secondary bg-clip-text text-transparent ">
+              {mockUser.username}
+            </h1>
+            <a href="/dashboard/profile" className="ml-2 p-1.5 bg-primary/20 rounded-xl hover:bg-primary/40 transition-all group">
+              <Edit size={16} className="text-primary group-hover:text-background transition-colors" />
+            </a>
+          </div>
           <div className="flex items-center gap-2 justify-center md:justify-start text-xs text-foreground/80 ">
             <Wallet size={24} className="text-primary shrink-0" />
             <span className="font-mono bg-surface/50 px-2 py-2 rounded-xl border border-surface/50 backdrop-blur-sm">
