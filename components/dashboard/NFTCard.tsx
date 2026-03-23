@@ -28,11 +28,12 @@ export interface NFTCardProps {
   onUpdatePrice?: () => void;
   onViewAuction?: () => void;
   onView?: () => void;
+  onCardClick?: () => void;
 }
 
 
 
-export default function NFTCard({ id, title, image, isOwner, isCreator, status, price, currentBid, endTime, onSell, onUpdatePrice, onViewAuction, onView }: NFTCardProps) {
+export default function NFTCard({ id, title, image, isOwner, isCreator, status, price, currentBid, endTime, onSell, onUpdatePrice, onViewAuction, onView, onCardClick }: NFTCardProps) {
   const getStatusColor = (s: Status) => {
     switch (s) {
       case "NOT_LISTED": return "gray";
@@ -91,7 +92,17 @@ export default function NFTCard({ id, title, image, isOwner, isCreator, status, 
   };
 
   return (
-    <div className="group relative bg-surface/50 backdrop-blur-xl rounded-3xl border border-surface/50 p-6 hover:border-primary/75 hover:shadow-2xl hover:shadow-primary/25 transition-all duration-500 overflow-hidden h-full flex flex-col">
+<div 
+  className="group relative bg-surface/50 backdrop-blur-xl rounded-3xl border border-surface/50 p-6 hover:border-primary/75 hover:shadow-2xl hover:shadow-primary/25 transition-all duration-500 overflow-hidden h-full flex flex-col cursor-pointer" 
+  onClick={onCardClick}
+  role="button"
+  tabIndex={0}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      onCardClick?.();
+    }
+  }}
+>
       {/* IMAGE */}
       <div className="relative rounded-2xl overflow-hidden mb-6 aspect-video bg-gradient-to-br from-muted/50 to-transparent group-hover:scale-[1.02] transition-transform duration-700">
         <Image 
