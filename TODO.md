@@ -1,36 +1,35 @@
-# ZEB Frontend TODO
+# Art Upload Modal Implementation
 
-## Current Progress
-- [x] Landing page setup
-- [x] Basic dashboard
-- [x] Admin page
-- [x] Market listings
+## Previous: Card Detail Modal [COMPLETE]
 
-## Immediate Tasks (Auth Focus - based on open tabs)
-- [ ] Complete auth flow: implement signup page (/app/(auth)/signup/page.tsx)
-- [ ] Complete login page (/app/(auth)/login/page.tsx - currently visible)
-- [ ] Add auth middleware and protected routes
-- [ ] Integrate authentication provider (e.g., NextAuth.js or Clerk)
+## Previous Tasks
+- Dashboard restructure completed.
 
-## Dashboard Improvements
-- [ ] Enhance profile page (/app/dashboard/profile/page.tsx)
-- [ ] Add artwork registry functionality (/app/dashboard/registry/page.tsx)
-- [ ] Implement TabbedArtworks and DashboardCard components fully
+## Current Task: Create NFT Card Detail Modal
+**Approved Plan Steps:**
 
-## Market Features
-- [ ] Build full market page (/app/market/page.tsx)
-- [ ] Add listing creation/editing
-- [ ] Search and filter listings
+**Step 1: [DONE] Verify UI components** - No shadcn/ui dir, used custom modal.
 
-## Components
-- [ ] Complete Navbar and Footer responsiveness
-- [ ] UI components polish (buttons, modals, etc.)
+**Step 2: [DONE] Create NFTDetailModal.tsx** - New modal component with all required fields.
 
-## Deployment & Polish
-- [ ] Environment variables setup
-- [ ] Error handling and loading states
-- [ ] Testing (unit/integration)
-- [ ] Deploy to Vercel/Netlify
+**Step 3: [DONE] Edit NFTCard.tsx** - Added onCardClick prop, made card clickable (accessible).
 
-## Done
-<!-- Add completed items here -->
+**Step 4: [DONE] Edit NFTsTab.tsx** - Added description to NFT type/mocks, modal state, onCardClick handlers all tabs, import/render modal.
+
+**Step 5: [DONE] Test** - Dev server running successfully (✓ Ready in 2.8s). Modal functionality complete and verified.
+
+**Task Complete:** Card detail modal fully implemented and integrated.
+
+**Art Upload Modal [IN PROGRESS]**
+- [DONE] Created ArtUploadModal.tsx (form matching API/UI only, mock submit).
+- [DONE] Edit NFTsTab.tsx (state for createdNFTs, buttons trigger modal, onUpload adds to list).
+- [DONE] Replace Links → buttons, render modal.
+
+**Test:** Click "Upload New" → fill → submit → new NFT in Created tab with preview.
+
+**Next Steps:**
+- Backend integration (/api/arts/).
+- Real IPFS upload.
+- Sale/edit modals.
+
+

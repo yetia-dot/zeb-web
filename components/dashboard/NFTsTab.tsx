@@ -4,11 +4,14 @@ import React, { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Search, Filter, BookOpen, Music, Palette, UploadCloud } from 'lucide-react'
 import NFTCard from './NFTCard'
+import NFTDetailModal from './NFTDetailModal'
+import ArtUploadModal from './ArtUploadModal'
 import type { NFTCardProps, Status } from './NFTCard'
 
 interface NFT {
   id: number
   title: string
+  description: string
   creator: string
   owner?: string
   price: string
@@ -21,27 +24,27 @@ interface NFT {
 type TabType = 'owned' | 'created' | 'listings'
 
 const rawOwnedNFTs: NFT[] = [
-  { id: 1, title: 'Cosmic Rift by NovaCollect', creator: 'NovaC...K7P2', owner: 'You', price: '450 XLM', img: '/file.svg', type: 'digital art', genre: 'rock' },
-  { id: 2, title: 'Digital Lotus #44', creator: 'ArtByZ...4M9Q', owner: 'You', price: '890 XLM', img: '/file.svg', type: 'book', genre: 'classic' },
-  { id: 3, title: 'Aurora Code Rain', creator: 'CodeR...H8J5', owner: 'You', price: '320 XLM', img: '/file.svg', type: 'digital art', genre: 'hip hop' },
-  { id: 4, title: 'Pixel Nebula Drift', creator: 'PixelN...2L6R', owner: 'You', price: '560 XLM', img: '/file.svg', type: 'music', genre: 'jazz' },
-  { id: 5, title: 'Synthwave Horizon', creator: 'Synth...9F3V', owner: 'You', price: '420 XLM', img: '/file.svg', type: 'digital art', genre: 'pop' },
-  { id: 6, title: 'Glitch Archive #12', creator: 'Glitch...M5T1', owner: 'You', price: '290 XLM', img: '/file.svg', type: 'literary work', genre: 'other' },
+  { id: 1, title: 'Cosmic Rift by NovaCollect', description: 'A mesmerizing cosmic landscape that captures the birth of stars in vibrant neon colors.', creator: 'NovaC...K7P2', owner: 'You', price: '450 XLM', img: '/file.svg', type: 'digital art', genre: 'rock' },
+  { id: 2, title: 'Digital Lotus #44', description: 'Limited edition generative lotus flower rendered with mathematical precision and symmetry.', creator: 'ArtByZ...4M9Q', owner: 'You', price: '890 XLM', img: '/file.svg', type: 'book', genre: 'classic' },
+  { id: 3, title: 'Aurora Code Rain', description: 'Matrix-style code rain meets northern lights in a hypnotic generative animation.', creator: 'CodeR...H8J5', owner: 'You', price: '320 XLM', img: '/file.svg', type: 'digital art', genre: 'hip hop' },
+  { id: 4, title: 'Pixel Nebula Drift', description: 'Retro pixel art nebula with smooth drifting particles and 8-bit color palette.', creator: 'PixelN...2L6R', owner: 'You', price: '560 XLM', img: '/file.svg', type: 'music', genre: 'jazz' },
+  { id: 5, title: 'Synthwave Horizon', description: '80s synthwave sunset with palm trees, chrome cars, and glowing grid horizon.', creator: 'Synth...9F3V', owner: 'You', price: '420 XLM', img: '/file.svg', type: 'digital art', genre: 'pop' },
+  { id: 6, title: 'Glitch Archive #12', description: 'Datamoshed VHS glitches archived as permanent digital artifacts.', creator: 'Glitch...M5T1', owner: 'You', price: '290 XLM', img: '/file.svg', type: 'literary work', genre: 'other' },
 ]
 
 const rawCreatedNFTs: NFT[] = [
-  { id: 1, title: 'Neon Syntax #001', creator: 'GCF2A...3X9Y', price: '450 XLM', img: '/file.svg', type: 'digital art', genre: 'hip hop' },
-  { id: 2, title: 'Cyber Bloom Genesis', creator: 'GCF2A...3X9Y', price: '320 XLM', img: '/file.svg', type: 'digital art', genre: 'pop' },
-  { id: 4, title: 'Stellar Orbit Drift', creator: 'GCF2A...3X9Y', price: '240 XLM', img: '/file.svg', type: 'music', genre: 'classic' },
-  { id: 5, title: 'Magenta Pulse Matrix', creator: 'GCF2A...3X9Y', price: '590 XLM', img: '/file.svg', type: 'digital art', genre: 'jazz' },
-  { id: 6, title: 'Ethereum Echo', creator: 'GCF2A...3X9Y', price: '180 XLM', img: '/file.svg', type: 'literary work', genre: 'other' },
+  { id: 1, title: 'Neon Syntax #001', description: 'First in generative syntax series - code as poetry rendered in pure neon glow.', creator: 'GCF2A...3X9Y', price: '450 XLM', img: '/file.svg', type: 'digital art', genre: 'hip hop' },
+  { id: 2, title: 'Cyber Bloom Genesis', description: 'Organic cyberpunk flowers blooming from corrupted data streams.', creator: 'GCF2A...3X9Y', price: '320 XLM', img: '/file.svg', type: 'digital art', genre: 'pop' },
+  { id: 4, title: 'Stellar Orbit Drift', description: 'Planetary orbits visualized with particle drift and gravitational lensing effects.', creator: 'GCF2A...3X9Y', price: '240 XLM', img: '/file.svg', type: 'music', genre: 'classic' },
+  { id: 5, title: 'Magenta Pulse Matrix', description: 'Pulsating matrix rain in pure magenta with rhythmic frequency modulation.', creator: 'GCF2A...3X9Y', price: '590 XLM', img: '/file.svg', type: 'digital art', genre: 'jazz' },
+  { id: 6, title: 'Ethereum Echo', description: 'Echoes of blockchain transactions visualized as haunting digital poetry.', creator: 'GCF2A...3X9Y', price: '180 XLM', img: '/file.svg', type: 'literary work', genre: 'other' },
 ]
 
 const rawSellingNFTs: NFT[] = [
-  { id: 7, title: 'Neon Syntax #001', creator: 'You (GCF2A...3X9Y)', price: '300 XLM', img: '/file.svg', type: 'digital art', genre: 'hip hop', status: 'auction' as const },
-  { id: 8, title: 'Cyber Bloom Genesis', creator: 'You (GCF2A...3X9Y)', price: '650 XLM', img: '/file.svg', type: 'digital art', genre: 'pop', status: 'auction' as const },
-  { id: 9, title: 'Stellar Orbit Drift', creator: 'You (GCF2A...3X9Y)', price: '180 XLM', img: '/file.svg', type: 'music', genre: 'classic', status: 'auction' as const },
-  { id: 10, title: 'Magenta Pulse Matrix', creator: 'You (GCF2A...3X9Y)', price: '420 XLM', img: '/file.svg', type: 'digital art', genre: 'jazz', status: 'auction' as const },
+  { id: 7, title: 'Neon Syntax #001', description: 'First in generative syntax series - code as poetry rendered in pure neon glow.', creator: 'You (GCF2A...3X9Y)', price: '300 XLM', img: '/file.svg', type: 'digital art', genre: 'hip hop', status: 'auction' as const },
+  { id: 8, title: 'Cyber Bloom Genesis', description: 'Organic cyberpunk flowers blooming from corrupted data streams.', creator: 'You (GCF2A...3X9Y)', price: '650 XLM', img: '/file.svg', type: 'digital art', genre: 'pop', status: 'auction' as const },
+  { id: 9, title: 'Stellar Orbit Drift', description: 'Planetary orbits visualized with particle drift and gravitational lensing effects.', creator: 'You (GCF2A...3X9Y)', price: '180 XLM', img: '/file.svg', type: 'music', genre: 'classic', status: 'auction' as const },
+  { id: 10, title: 'Magenta Pulse Matrix', description: 'Pulsating matrix rain in pure magenta with rhythmic frequency modulation.', creator: 'You (GCF2A...3X9Y)', price: '420 XLM', img: '/file.svg', type: 'digital art', genre: 'jazz', status: 'auction' as const },
 ]
 
 export default function NFTsTab() {
@@ -50,8 +53,13 @@ export default function NFTsTab() {
   const [selectedType, setSelectedType] = useState<'book' | 'literary work' | 'digital art' | 'music' | 'all'>('all')
   const [selectedGenre, setSelectedGenre] = useState<'hip hop' | 'classic' | 'rock' | 'pop' | 'jazz' | 'other' | 'all'>('all')
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'auction'>('all')
+  const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [uploadOpen, setUploadOpen] = useState(false)
+  const [createdNFTs, setCreatedNFTs] = useState(rawCreatedNFTs)
+  const [nextCreatedId, setNextCreatedId] = useState(Math.max(...rawCreatedNFTs.map(nft => nft.id)) + 1)
 
-  const nfts = activeTab === 'owned' ? rawOwnedNFTs : activeTab === 'created' ? rawCreatedNFTs : rawSellingNFTs
+  const nfts = activeTab === 'owned' ? rawOwnedNFTs : activeTab === 'created' ? createdNFTs : rawSellingNFTs
 
   const filteredNFTs = useMemo(() => {
     return nfts.filter((nft) => {
@@ -160,10 +168,10 @@ export default function NFTsTab() {
                 </select>
               )}
             </div>
-            <Link href="/dashboard/upload" className="flex items-center gap-2 px-4 py-1 bg-gradient-to-r from-primary to-secondary text-background font-bold rounded-xl hover:shadow-lg hover:shadow-primary/25 transition-all whitespace-nowrap">
+            <button onClick={() => setUploadOpen(true)} className="flex items-center gap-2 px-4 py-1 bg-gradient-to-r from-primary to-secondary text-background font-bold rounded-xl hover:shadow-lg hover:shadow-primary/25 transition-all whitespace-nowrap">
               <UploadCloud size={16} />
               Upload New
-            </Link>
+            </button>
           </div>
 
           {/* Grid */}
@@ -180,12 +188,18 @@ export default function NFTsTab() {
               };
 
               if (activeTab === 'owned') {
-                return <NFTCard key={key} {...commonProps} status="NOT_LISTED" price={parseFloat(nft.price)} onSell={() => console.log('Sell owned NFT', nft.id)} />;
+                return <NFTCard key={key} {...commonProps} status="NOT_LISTED" price={parseFloat(nft.price)} onSell={() => console.log('Sell owned NFT', nft.id)} onCardClick={() => {
+                  setSelectedNFT(nft)
+                  setIsModalOpen(true)
+                }} />;
               }
 
               if (activeTab === 'created') {
                 const status = nft.status === 'auction' ? "AUCTION" : "FIXED_PRICE" as const;
-                return <NFTCard key={key} {...commonProps} status={status} price={parseFloat(nft.price)} onView={() => console.log('View created NFT', nft.id)} />;
+                return <NFTCard key={key} {...commonProps} status={status} price={parseFloat(nft.price)} onView={() => console.log('View created NFT', nft.id)} onCardClick={() => {
+                  setSelectedNFT(nft)
+                  setIsModalOpen(true)
+                }} />;
               }
 
               // Listings tab customization - mix auction and selling (fixed price)
@@ -202,6 +216,10 @@ export default function NFTsTab() {
                 endTime={isAuction ? auctionEndTime : undefined}
                 onUpdatePrice={() => console.log('Update price Listings', nft.id)}
                 onViewAuction={() => console.log('View auction Listings', nft.id)}
+                onCardClick={() => {
+                  setSelectedNFT(nft)
+                  setIsModalOpen(true)
+                }}
               />;
             })}
             {filteredNFTs.length === 0 && (
@@ -209,11 +227,57 @@ export default function NFTsTab() {
                 <UploadCloud size={64} className="mx-auto mb-6 text-primary opacity-50" />
                 <h3 className="text-2xl font-black mb-4 text-foreground/70">{activeTab === 'owned' ? 'Empty Collection' : activeTab === 'created' ? 'Nothing Created' : 'Nothing Selling'}</h3>
                 <p className="text-xl mb-8 max-w-md mx-auto leading-relaxed">{emptyMessage}</p>
-                <Link href={activeTab === 'owned' ? '/market' : activeTab === 'created' ? '/dashboard/upload' : '/dashboard/new-auction'} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-background font-bold rounded-2xl hover:shadow-2xl hover:shadow-primary/30 transition-all text-lg">
+                <button 
+                  onClick={() => {
+                    if (activeTab === 'owned') {
+                      window.location.href = '/market'
+                    } else if (activeTab === 'listings') {
+                      // TODO: new auction modal
+                      console.log('Open new auction')
+                    } else {
+                      setUploadOpen(true)
+                    }
+                  }} 
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-background font-bold rounded-2xl hover:shadow-2xl hover:shadow-primary/30 transition-all text-lg"
+                >
                   {activeTab === 'owned' ? 'Browse Marketplace' : activeTab === 'created' ? 'Create First NFT' : 'List for Sale'}
-                </Link>
+                </button>
               </div>
             )}
+            <NFTDetailModal
+              nft={selectedNFT}
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              currentUserAddress="GCF2A...3X9Y"
+              onSale={(nftId) => {
+                console.log('Open sale for NFT', nftId)
+                setIsModalOpen(false)
+              }}
+              onEdit={(nftId) => {
+                console.log('Edit NFT', nftId)
+                setIsModalOpen(false)
+              }}
+            />
+            <ArtUploadModal
+              isOpen={uploadOpen}
+              onClose={() => setUploadOpen(false)}
+              onUpload={(newArt) => {
+                const newId = nextCreatedId
+                setCreatedNFTs(prev => [...prev, {
+                  id: newId,
+                  title: newArt.title,
+                  description: newArt.description,
+                  price: newArt.minPrice || 'TBD XLM',
+                  img: newArt.img,
+                  type: newArt.category as any,
+                  genre: newArt.genre as any,
+                  creator: 'GCF2A...3X9Y (You)',
+                  owner: undefined,
+                  status: undefined,
+                }])
+                setNextCreatedId(prev => prev + 1)
+              }}
+            />
           </div>
         </div>
       </div>
