@@ -30,27 +30,7 @@ export interface NFTCardProps {
   onView?: () => void;
 }
 
-interface NFTCardProps {
-  id: string;
-  title: string;
-  image: string;
 
-  // ownership context
-  isOwner?: boolean;
-  isCreator?: boolean;
-
-  // listing state
-  status: Status;
-  price?: number;        // for fixed price
-  currentBid?: number;   // for auction
-  endTime?: number;      // auction timer
-
-  // actions
-  onSell?: () => void;
-  onUpdatePrice?: () => void;
-  onViewAuction?: () => void;
-  onView?: () => void;
-}
 
 export default function NFTCard({ id, title, image, isOwner, isCreator, status, price, currentBid, endTime, onSell, onUpdatePrice, onViewAuction, onView }: NFTCardProps) {
   const getStatusColor = (s: Status) => {
